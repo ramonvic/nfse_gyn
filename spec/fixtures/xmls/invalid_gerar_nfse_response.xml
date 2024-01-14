@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <GerarNfseResponse xmlns="http://nfse.goiania.go.gov.br/ws/">
+      <GerarNfseResult>
+        <![CDATA[
+          <GerarNfseResposta
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://notacarioca.rio.gov.br/WSNacional/XSD/1/nfse_pcrj_v01.xsd">
+            <ListaMensagemRetorno
+              xmlns="http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd">
+              <MensagemRetorno>
+                <Codigo>E10</Codigo>
+                <Mensagem>RPS já informado.</Mensagem>
+                <Correcao>Para essa Inscrição Municipal/CNPJ já existe um RPS informado com o mesmo número, série e tipo. </Correcao>
+              </MensagemRetorno>
+            </ListaMensagemRetorno>
+          </GerarNfseResposta>
+        ]]>
+      </GerarNfseResult>
+    </GerarNfseResponse>
+  </soap:Body>
+</soap:Envelope>

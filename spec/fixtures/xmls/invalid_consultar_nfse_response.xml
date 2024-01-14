@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <ConsultarNfseRpsResponse xmlns="http://nfse.goiania.go.gov.br/ws/">
+      <ConsultarNfseRpsResult>
+        <![CDATA[
+          <ConsultarNfseRpsResposta xmlns="http://nfse.goiania.go.gov.br/xsd/nfse_gyn_v02.xsd">
+            <ListaMensagemRetorno>
+              <MensagemRetorno>
+                <Codigo>L031</Codigo>
+                <Mensagem>RPS NAO ENCONTRADO</Mensagem>
+                <Correcao>RPS NAO ENCONTRADO</Correcao>
+              </MensagemRetorno>
+            </ListaMensagemRetorno>
+          </ConsultarNfseRpsResposta>
+        ]]>
+      </ConsultarNfseRpsResult>
+    </ConsultarNfseRpsResponse>
+  </soap:Body>
+</soap:Envelope>

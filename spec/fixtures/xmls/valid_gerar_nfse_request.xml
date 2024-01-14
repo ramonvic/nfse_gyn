@@ -1,0 +1,75 @@
+<GerarNfseEnvio xmlns="http://nfse.goiania.go.gov.br/xsd/nfse_gyn_v02.xsd">
+  <Rps>
+    <InfDeclaracaoPrestacaoServico xmlns="http://nfse.goiania.go.gov.br/xsd/nfse_gyn_v02.xsd">
+      <Rps Id="3033">
+        <IdentificacaoRps>
+          <Numero>3033</Numero>
+          <Serie>TESTE</Serie>
+          <Tipo>1</Tipo>
+        </IdentificacaoRps>
+        <DataEmissao>2024-01-11T23:33:22</DataEmissao>
+        <Status>1</Status>
+      </Rps>
+      <Servico>
+        <Valores>
+          <ValorServicos>100.1</ValorServicos>
+          <Aliquota>2.0</Aliquota>
+        </Valores>
+        <CodigoTributacaoMunicipio>620150100</CodigoTributacaoMunicipio>
+        <Discriminacao>Teste de RPS</Discriminacao>
+        <CodigoMunicipio>0025300</CodigoMunicipio>
+      </Servico>
+      <Prestador>
+        <CpfCnpj>
+          <Cnpj>46034125000133</Cnpj>
+        </CpfCnpj>
+        <InscricaoMunicipal>5671485</InscricaoMunicipal>
+      </Prestador>
+      <Tomador>
+        <IdentificacaoTomador>
+          <CpfCnpj>
+            <Cnpj>98924674000187</Cnpj>
+          </CpfCnpj>
+        </IdentificacaoTomador>
+        <RazaoSocial>XPTO Tecnologia Ltda</RazaoSocial>
+        <Endereco>
+          <Endereco>Rua das Rosas</Endereco>
+          <Numero>111</Numero>
+          <Complemento>Sobre Loja</Complemento>
+          <Bairro>Centro</Bairro>
+          <CodigoMunicipio>0025300</CodigoMunicipio>
+          <Uf>GO</Uf>
+          <Cep>74672680</Cep>
+        </Endereco>
+      </Tomador>
+    </InfDeclaracaoPrestacaoServico>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+        <Reference URI="#3033">
+          <Transforms>
+            <Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+            <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+          </Transforms>
+          <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+          <DigestValue>5dog9yR3VI8Hkk0JGHIdZFHXXWo=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>
+        icFX21VVyjXnX/C+dkGs1qXa0vleNKk25ycNUSb2MAUTidi1AApKdQEecG3AYaQVT4pfwUXCJzPCaSPNXn5kr+hk49j8dO0zo5wPyN6dhLT49WjkJQKPzA9wj/rl9Gs4kPp/rpOtSfsV3UlyjvMfEvmHlOZseg5XTRnAjIzm3oTWrRK5oRQmYm0TmeH3e7LHxC+DIXaIp6+o2DfTU5zvrmkokTs4r7owCTvn0Lox86JuUuU3RuwSix09lmrTGcm/L5eSq9CF+bNX1ovod33RILfR4ZQbK6RDo2Pbx55FyIuKUUqBqbIzZuntVQ3MalWmZi0Dj4dbhAG0z6Zu/1VpRw==
+      </SignatureValue>
+      <KeyInfo>
+        <X509Data>
+          <X509IssuerSerial>
+            <X509IssuerName>CN=AC SOLUTI Multipla v5,OU=AC SOLUTI v5,O=ICP-Brasil,C=BR</X509IssuerName>
+            <X509SerialNumber>1287505043903900170</X509SerialNumber>
+          </X509IssuerSerial>
+          <X509Certificate>
+            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
+          </X509Certificate>
+        </X509Data>
+      </KeyInfo>
+    </Signature>
+  </Rps>
+</GerarNfseEnvio>
