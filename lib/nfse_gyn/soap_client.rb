@@ -11,6 +11,7 @@ module NfseGyn
     private
 
     def client
+      log = NfseGyn.configuration.log_level != :none
       @client ||= Savon.client(
         wsdl: NfseGyn.configuration.wsdl,
         env_namespace: :soap,
@@ -21,8 +22,8 @@ module NfseGyn
         ssl_cert_key_file: NfseGyn.configuration.cert_key_path,
         ssl_ca_cert_file: NfseGyn.configuration.ca_cert_path,
         ssl_cert_key_password: NfseGyn.configuration.cert_key_password,
-        log_level: NfseGyn.configuration.log_level,
-        log: true,
+        log_level: log ? NfseGyn.configuration.log_level : nil,
+        log: log,
         open_timeout: 120,
         read_timeout: 120
       )
