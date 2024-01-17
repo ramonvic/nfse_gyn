@@ -19,16 +19,17 @@ RSpec.describe NfseGyn::GerarNfse do
   end
 
   describe '#execute!' do
+    let(:response) { File.read(fixture_file_path('xmls/valid_gerar_nfse_response.xml'))}
     let(:xml_payload) { File.read(fixture_file_path('xmls/valid_gerar_nfse_request.xml')) }
     let(:request_payload) { "<ArquivoXML><![CDATA[#{xml_payload}]]></ArquivoXML>" }
 
     before do
       allow(subject).to receive(:to_xml).and_return(xml_payload)
-      savon.expects(:gerar_nfse).with(message: request_payload).returns(response)
     end
 
     context 'valid request' do
-      let(:response) { File.read(fixture_file_path('xmls/valid_gerar_nfse_response.xml'))}
+
+      before { savon.expects(:gerar_nfse).with(message: request_payload).returns(response) }
 
       it 'returns a valid response' do
         expect(subject.execute!).to be_successful
@@ -38,12 +39,27 @@ RSpec.describe NfseGyn::GerarNfse do
     context 'invalid request' do
       let(:response) { File.read(fixture_file_path('xmls/invalid_gerar_nfse_response.xml'))}
 
+      before { savon.expects(:gerar_nfse).with(message: request_payload).returns(response) }
+
       it 'returns a invalid response' do
         expect(subject.execute!).to_not be_successful
       end
 
       it 'returns a error message' do
         expect(subject.execute!.error_message).to eq('Para essa Inscrição Municipal/CNPJ já existe um RPS informado com o mesmo número, série e tipo.')
+      end
+    end
+
+    context 'when mock data' do
+      before do
+        NfseGyn.configuration.mock_mode = true
+        allow(NfseGyn::MockGerarNfseResponse).to receive(:new).and_return("mock response")
+      end
+
+      after { NfseGyn.configuration.mock_mode = false }
+
+      it 'should return a MockConsultarNfseResponse' do
+        expect(subject.execute!).to eq("mock response")
       end
     end
   end

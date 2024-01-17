@@ -45,4 +45,30 @@ RSpec.describe NfseGyn::Configuration do
     it { expect(NfseGyn.configuration.cert_key_password).to eq 'very-secure-encrypted-password' }
     it { expect(NfseGyn.configuration.wsdl).to eq 'https://nfse.goiania.go.gov.br/ws/nfse.asmx?wsdl' }
   end
+
+  describe '#from_h' do
+    let(:hash) do
+      {
+        test_mode: true,
+        cert_path: 'certicate.pem',
+        ca_cert_path: 'ca/certicate.pem',
+        cert_key_path: 'certicate/key.pem',
+        cert_key_password: 'updated-password'
+      }
+    end
+
+    before do
+      NfseGyn.configuration.from_h(hash)
+    end
+
+    after do
+      NfseGyn.reset!
+    end
+
+    it { expect(NfseGyn.configuration.test_mode).to be_truthy }
+    it { expect(NfseGyn.configuration.cert_path).to eq 'certicate.pem' }
+    it { expect(NfseGyn.configuration.ca_cert_path).to eq 'ca/certicate.pem' }
+    it { expect(NfseGyn.configuration.cert_key_path).to eq 'certicate/key.pem' }
+    it { expect(NfseGyn.configuration.cert_key_password).to eq 'updated-password' }
+  end
 end

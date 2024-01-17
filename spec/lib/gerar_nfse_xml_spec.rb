@@ -40,7 +40,7 @@ RSpec.describe NfseGyn::GerarNfseXML do
   describe '#certificate' do
     context 'when has not certificate in configuration' do
       it 'shoud certificate is nil' do
-        expect(subject.certificate).to be_nil
+        expect(subject.send(:certificate)).to be_nil
       end
     end
 
@@ -54,7 +54,7 @@ RSpec.describe NfseGyn::GerarNfseXML do
       end
 
       it 'shoud certificate not nil' do
-        expect(subject.certificate).to_not be_nil
+        expect(subject.send(:certificate)).to_not be_nil
       end
     end
   end
@@ -62,7 +62,7 @@ RSpec.describe NfseGyn::GerarNfseXML do
   describe '#private_key' do
     context 'when has not private_key in configuration' do
       it 'shoud private_key is nil' do
-        expect(subject.private_key).to be_nil
+        expect(subject.send(:private_key)).to be_nil
       end
     end
 
@@ -76,7 +76,7 @@ RSpec.describe NfseGyn::GerarNfseXML do
       end
 
       it 'shoud private_key not nil' do
-        expect(subject.private_key).to_not be_nil
+        expect(subject.send(:private_key)).to_not be_nil
       end
     end
   end
