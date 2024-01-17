@@ -47,7 +47,8 @@ Crie um arquivo `config/initializers/nfse_gyn.rb` e adicione:
 ```ruby
 NfseGyn.configure do |nfse|
   nfse.test_mode = true
-  nfse.log_level = :debug
+  nfse.test_mode = true
+  nfse.log_level = :none
   nfse.cnpj = '000000000000000'
   nfse.inscricao_municipal = '0000000'
   nfse.codigo_tributacao_municipio = '00000000'

@@ -8,7 +8,11 @@ module NfseGyn
     end
 
     def execute!
-      @client.call(:gerar_nfse, self)
+      if NfseGyn.configuration.mock_mode
+        NfseGyn::MockGerarNfseResponse.new(@invoice)
+      else
+        @client.call(:gerar_nfse, self)
+      end
     end
 
     def to_xml

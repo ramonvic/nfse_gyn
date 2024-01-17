@@ -13,7 +13,6 @@ module NfseGyn
     end
 
     def error?
-      binding.pry
       content['ListaMensagemRetorno'].present?
     end
 

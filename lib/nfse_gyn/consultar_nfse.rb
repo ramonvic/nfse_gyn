@@ -12,7 +12,11 @@ module NfseGyn
     end
 
     def execute!
-      @client.call(:consultar_nfse_rps, self)
+      if NfseGyn.configuration.mock_mode
+        NfseGyn::MockConsultarNfseResponse.new(invoice_number, invoice_serie, invoice_type)
+      else
+        @client.call(:consultar_nfse_rps, self)
+      end
     end
 
     def to_xml

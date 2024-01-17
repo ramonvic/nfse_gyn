@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    nfse_gyn (0.1.0)
+    nfse_gyn (0.1.1)
       activemodel (~> 3.0)
+      activesupport (~> 3.0)
       savon (~> 2.9)
       signer (~> 1.10)
 

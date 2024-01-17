@@ -2,6 +2,7 @@ module NfseGyn
   class Configuration
     attr_accessor :wsdl,
                   :test_mode,
+                  :mock_mode,
                   :log_level,
                   :ca_cert_path,
                   :cert_key_path,
@@ -16,6 +17,7 @@ module NfseGyn
 
     def initialize
       @test_mode = false
+      @mock_mode = false
       @log_level = :debug
       @wsdl = 'https://nfse.goiania.go.gov.br/ws/nfse.asmx?wsdl'
 
