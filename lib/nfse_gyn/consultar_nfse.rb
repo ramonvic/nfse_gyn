@@ -46,16 +46,12 @@ module NfseGyn
         @content ||= output['ConsultarNfseRpsResposta']
       end
 
-      def number
-        content['CompNfse']['Nfse']['InfNfse']['Numero'] if successful?
-      end
-
-      def verification_code
-        content['CompNfse']['Nfse']['InfNfse']['CodigoVerificacao'] if successful?
+      def body
+        content['CompNfse']
       end
 
       def error?
-        !content['CompNfse'] || content['ListaMensagemRetorno']['MensagemRetorno']['Codigo'] != 'L000'
+        !body || content['ListaMensagemRetorno']['MensagemRetorno']['Codigo'] != 'L000'
       end
     end
   end

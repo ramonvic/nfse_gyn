@@ -12,6 +12,25 @@ module NfseGyn
       !error?
     end
 
+    def link
+      <<-URL.squish
+        https://www2.goiania.go.gov.br/sistemas/snfse/asp/snfse00200w0.asp?inscricao=#{municipal_registration}&nota=#{number}&verificador=#{verification_code}
+      URL
+    end
+
+    def municipal_registration
+      p = body['Nfse']['InfNfse']['DeclaracaoPrestacaoServico']['Prestador']
+      p['IdentificacaoPrestador']['InscricaoMunicipal'] if successful?
+    end
+
+    def number
+      body['Nfse']['InfNfse']['Numero'] if successful?
+    end
+
+    def verification_code
+      body['Nfse']['InfNfse']['CodigoVerificacao'] if successful?
+    end
+
     def error?
       content['ListaMensagemRetorno'].present?
     end

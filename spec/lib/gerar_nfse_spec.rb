@@ -19,7 +19,7 @@ RSpec.describe NfseGyn::GerarNfse do
   end
 
   describe '#execute!' do
-    let(:response) { File.read(fixture_file_path('xmls/valid_gerar_nfse_response.xml'))}
+    let(:response) { File.read(fixture_file_path('xmls/valid_gerar_nfse_response.xml')) }
     let(:xml_payload) { File.read(fixture_file_path('xmls/valid_gerar_nfse_request.xml')) }
     let(:request_payload) { "<ArquivoXML><![CDATA[#{xml_payload}]]></ArquivoXML>" }
 
@@ -28,16 +28,31 @@ RSpec.describe NfseGyn::GerarNfse do
     end
 
     context 'valid request' do
-
       before { savon.expects(:gerar_nfse).with(message: request_payload).returns(response) }
 
       it 'returns a valid response' do
         expect(subject.execute!).to be_successful
       end
+
+      it 'response number is equals 370' do
+        expect(subject.execute!.number).to eq('370')
+      end
+
+      it 'response verification_code is equals MB94-C3ZA' do
+        expect(subject.execute!.verification_code).to eq('MB94-C3ZA')
+      end
+
+      it 'response municipal_registration is equals 1300687' do
+        expect(subject.execute!.municipal_registration).to eq('1300687')
+      end
+
+      it 'response link is equals nf link' do
+        expect(subject.execute!.link).to eq('https://www2.goiania.go.gov.br/sistemas/snfse/asp/snfse00200w0.asp?inscricao=1300687&nota=370&verificador=MB94-C3ZA')
+      end
     end
 
     context 'invalid request' do
-      let(:response) { File.read(fixture_file_path('xmls/invalid_gerar_nfse_response.xml'))}
+      let(:response) { File.read(fixture_file_path('xmls/invalid_gerar_nfse_response.xml')) }
 
       before { savon.expects(:gerar_nfse).with(message: request_payload).returns(response) }
 
@@ -53,13 +68,13 @@ RSpec.describe NfseGyn::GerarNfse do
     context 'when mock data' do
       before do
         NfseGyn.configuration.mock_mode = true
-        allow(NfseGyn::MockGerarNfseResponse).to receive(:new).and_return("mock response")
+        allow(NfseGyn::MockGerarNfseResponse).to receive(:new).and_return('mock response')
       end
 
       after { NfseGyn.configuration.mock_mode = false }
 
       it 'should return a MockConsultarNfseResponse' do
-        expect(subject.execute!).to eq("mock response")
+        expect(subject.execute!).to eq('mock response')
       end
     end
   end

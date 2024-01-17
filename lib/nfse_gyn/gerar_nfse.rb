@@ -26,12 +26,8 @@ module NfseGyn
         @content ||= output['GerarNfseResposta']
       end
 
-      def number
-        content['ListaNfse']['CompNfse']['Nfse']['InfNfse']['Numero'] if successful?
-      end
-
-      def verification_code
-        content['ListaNfse']['CompNfse']['Nfse']['InfNfse']['CodigoVerificacao'] if successful?
+      def body
+        content['ListaNfse']['CompNfse']
       end
 
       def error?
