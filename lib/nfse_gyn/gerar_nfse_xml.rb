@@ -18,32 +18,32 @@ module NfseGyn
           'InfDeclaracaoPrestacaoServico' => {
             '@xmlns' => 'http://nfse.goiania.go.gov.br/xsd/nfse_gyn_v02.xsd',
             'Rps' => {
-              '@Id' => @invoice[:identification_number],
+              '@Id' => raise_if_missing(@invoice[:identification_number], :identification_number),
               'IdentificacaoRps' => {
                 'Numero' => @invoice[:identification_number],
-                'Serie' => NfseGyn.configuration.rps_serie,
-                'Tipo' => NfseGyn.configuration.rps_tipo
+                'Serie' => raise_if_missing(NfseGyn.configuration.rps_serie, :rps_serie),
+                'Tipo' => raise_if_missing(NfseGyn.configuration.rps_tipo, :rps_tipo)
               },
-              'DataEmissao' => @invoice[:data_emissao],
+              'DataEmissao' => raise_if_missing(@invoice[:data_emissao], :data_emissao),
               'Status' => 1
             },
 
             'Servico' => {
               'Valores' => {
-                'ValorServicos' => @invoice[:total],
-                'Aliquota' => NfseGyn.configuration.valor_aliquota
+                'ValorServicos' => raise_if_missing(@invoice[:total], :total),
+                'Aliquota' => raise_if_missing(NfseGyn.configuration.valor_aliquota, :valor_aliquota)
               },
 
-              'CodigoTributacaoMunicipio' => NfseGyn.configuration.codigo_tributacao_municipio,
-              'Discriminacao' => clear(@invoice[:description]),
-              'CodigoMunicipio' => NfseGyn.configuration.codigo_municipio
+              'CodigoTributacaoMunicipio' => raise_if_missing(NfseGyn.configuration.codigo_tributacao_municipio, :codigo_tributacao_municipio),
+              'Discriminacao' => raise_if_missing(clear(@invoice[:description]), :description),
+              'CodigoMunicipio' => raise_if_missing(NfseGyn.configuration.codigo_municipio, :codigo_municipio)
             },
 
             'Prestador' => {
               'CpfCnpj' => {
-                'Cnpj' => NfseGyn.configuration.cnpj
+                'Cnpj' => raise_if_missing(NfseGyn.configuration.cnpj, :prestador_cnpj)
               },
-              'InscricaoMunicipal' => NfseGyn.configuration.inscricao_municipal
+              'InscricaoMunicipal' => raise_if_missing(NfseGyn.configuration.inscricao_municipal, :prestador_inscricao_municipal)
             },
 
             'Tomador' => tomador
@@ -52,8 +52,15 @@ module NfseGyn
       )
     end
 
+    private
+
+    def raise_if_missing(param, param_name)
+      throw "Param #{param_name} is missing" if param.blank?
+      param
+    end
+
     def sign(xml)
-      return xml if !certificate.present? || !private_key.present?
+      return xml if NfseGyn.configuration.mock_mode || !certificate.present? || !private_key.present?
       signer = Signer.new(xml, canonicalize_algorithm: :c14n_1_0, wss: false)
       signer.cert = OpenSSL::X509::Certificate.new(certificate)
       signer.private_key = OpenSSL::PKey::RSA.new(private_key, NfseGyn.configuration.cert_key_password)
@@ -89,7 +96,7 @@ module NfseGyn
 
       if document_type.present?
         xml['IdentificacaoTomador'] = {
-          'CpfCnpj' => { document_type => document_number }
+          'CpfCnpj' => { document_type => raise_if_missing(document_number, :tomador_document_number)}
         }
       end
 
