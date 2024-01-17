@@ -29,6 +29,13 @@ module NfseGyn
       @codigo_tributacao_municipio = ''
     end
 
+    def from_h(hash)
+      hash.each do |k, v|
+        instance_variable_set("@#{k}".to_sym, v)
+      end
+      self
+    end
+
     def rps_serie
       return 'TESTE' if test_mode
       'A'
