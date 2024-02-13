@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 require 'ostruct'
-require 'active_model'
-require 'active_support'
-require 'active_support/core_ext'
+require 'i18n'
 
 require 'nfse_gyn/version'
+require 'nfse_gyn/extensions'
 require 'nfse_gyn/configuration'
 require 'nfse_gyn/sanitizer'
 require 'nfse_gyn/soap_client'
@@ -16,6 +15,7 @@ require 'nfse_gyn/mock_gerar_nfse_response'
 require 'nfse_gyn/mock_consultar_nfse_response'
 
 HTTPI.adapter = :net_http
+I18n.config.available_locales = :en
 
 module NfseGyn
   def self.configure

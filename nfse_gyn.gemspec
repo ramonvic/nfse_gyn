@@ -19,8 +19,7 @@ Gem::Specification.new do |spec|
   spec.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'activemodel', '~> 3.0'
-  spec.add_dependency 'activesupport', '~> 3.0'
+  spec.add_dependency 'i18n'
   spec.add_dependency 'savon', '~> 2.9'
   spec.add_dependency 'signer', '~> 1.10'
 
