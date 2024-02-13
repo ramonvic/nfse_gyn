@@ -15,10 +15,11 @@ RSpec.configure do |config|
       nfse.test_mode = true
       nfse.cnpj = '46034125000133'
       nfse.inscricao_municipal = '5671485'
+      nfse.codigo_tributacao_municipio = '791120000'
     end
   end
 
-  config.disable_monkey_patching!
+  # config.disable_monkey_patching!
 
   config.profile_examples = 5
 
